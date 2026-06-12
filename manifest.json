@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "ActiveLearn AI: YouTube Cognitive Layer",
+  "version": "1.0.0",
+  "description": "Transform YouTube lectures into adaptive, high-retention active recall zones with attention intelligence and cognitive analytics.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*"
+      ],
+      "js": [
+        "ui/overlay.js",
+        "content.js"
+      ],
+      "css": [
+        "ui/overlay.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "ui/overlay.html",
+        "ui/overlay.css",
+        "ui/overlay.js",
+        "ui/dashboard.html",
+        "ui/dashboard.css"
+      ],
+      "matches": [
+        "https://*.youtube.com/*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+<div id="activelearn-dashboard" class="activelearn-sidebar-container closed">
+  <!-- Sidebar Toggle Tab -->
+  <button id="activelearn-toggle-btn" class="activelearn-toggle-tab" title="Toggle ActiveLearn AI Dashboard">
+    <div class="toggle-icon-container">
+      <span class="brain-glow-icon">🧠</span>
+      <span class="pulse-ring"></span>
+    </div>
+    <span class="toggle-text">ActiveLearn AI</span>
+  </button>
+
+  <!-- Sidebar Main Panel -->
+  <div class="activelearn-panel">
+    <!-- Header -->
+    <div class="panel-header">
+      <div class="brand-info">
+        <span class="brand-logo">🧠</span>
+        <div class="brand-text">
+          <h3>ActiveLearn AI</h3>
+          <div class="engine-status">
+            <span class="status-dot pulsing"></span>
+            <span class="status-label">Cognitive Layer Active</span>
+          </div>
+        </div>
+      </div>
+      <button id="activelearn-close-btn" class="panel-close-btn" title="Close Panel">×</button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="panel-tabs">
+      <button class="tab-btn active" data-tab="recall">
+        <span class="tab-icon">🎯</span>
+        <span class="tab-name">Recall</span>
+      </button>
+      <button class="tab-btn" data-tab="analytics">
+        <span class="tab-icon">📊</span>
+        <span class="tab-name">Analytics</span>
+      </button>
+      <button class="tab-btn" data-tab="revision">
+        <span class="tab-icon">⏳</span>
+        <span class="tab-name">Revision</span>
+      </button>
+      <button class="tab-btn" data-tab="companion">
+        <span class="tab-icon">💬</span>
+        <span class="tab-name">Companion</span>
+      </button>
+    </div>
+
+    <!-- Tab Contents Container -->
+    <div class="panel-body">
+      <!-- 1. ACTIVE RECALL TAB -->
+      <div id="tab-recall" class="tab-content active">
+        <div class="section-card current-concept-card">
+          <div class="card-header">
+            <span class="section-badge">CURRENT CONCEPT</span>
+            <span class="exam-weightage-badge high" id="current-weightage">UPSC/GATE High Weightage</span>
+          </div>
+          <h4 id="sidebar-concept-title">Detecting lecture topics...</h4>
+          <p id="sidebar-concept-desc">ActiveLearn is analyzing the lecture stream to build cognitive recall anchors.</p>
+          <div class="concept-progress-inline">
+            <div class="progress-track">
+              <div id="concept-progress-bar" class="progress-fill" style="width: 0%"></div>
+            </div>
+            <span id="concept-time-eta">0:00 / 0:00</span>
+          </div>
+        </div>
+
+        <div class="section-title">Lecture Concept Chunks</div>
+        <div class="concept-chunks-list" id="concept-chunks-container">
+          <div class="empty-placeholder">
+            <span>📚</span>
+            <p>Awaiting educational video stream to load concept timeline.</p>
+          </div>
+        </div>
+
+        <div class="action-dock">
+          <button id="sidebar-trigger-quiz" class="primary-action-btn">
+            <span>⚡</span> Trigger Active Recall Quiz
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. COGNITIVE ANALYTICS TAB -->
+      <div id="tab-analytics" class="tab-content">
+        <!-- Dashboard Metrics Grid -->
+        <div class="metrics-grid">
+          <!-- Focus Score Gauge -->
+          <div class="metric-card focus-card">
+            <div class="radial-gauge-wrapper">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                <path id="focus-gauge-fill" class="circle-fill focus-color" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+              </svg>
+              <div class="gauge-percentage" id="focus-score-text">0%</div>
+            </div>
+            <div class="metric-info">
+              <h5>Focus Index</h5>
+              <p>Active Attention Score</p>
+            </div>
+          </div>
+
+          <!-- Engagement Score Gauge -->
+          <div class="metric-card engagement-card">
+            <div class="radial-gauge-wrapper">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                <path id="engagement-gauge-fill" class="circle-fill engage-color" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+              </svg>
+              <div class="gauge-percentage" id="engagement-score-text">0%</div>
+            </div>
+            <div class="metric-info">
+              <h5>Engagement</h5>
+              <p>Interaction Level</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Retention Estimator -->
+        <div class="section-card retention-card">
+          <div class="retention-header">
+            <h5>Estimated Memory Retention</h5>
+            <span class="retention-val" id="retention-score">0%</span>
+          </div>
+          <div class="retention-bar-wrapper">
+            <div class="retention-bar-fill" id="retention-bar" style="width: 0%"></div>
+          </div>
+          <p class="retention-desc">Calculated via Ebbinghaus cognitive decay modeling against active recall responses.</p>
+        </div>
+
+        <!-- Weak-Topic Heatmap -->
+        <div class="section-card heatmap-card">
+          <h5>Weak-Topic Mastery Grid</h5>
+          <div class="heatmap-grid" id="analytics-heatmap-container">
+            <!-- Dynamically populated squares -->
+          </div>
+          <div class="heatmap-legend">
+            <span>Weak (0%)</span>
+            <div class="legend-scale">
+              <span class="scale-box score-0"></span>
+              <span class="scale-box score-1"></span>
+              <span class="scale-box score-2"></span>
+              <span class="scale-box score-3"></span>
+              <span class="scale-box score-4"></span>
+            </div>
+            <span>Mastered (100%)</span>
+          </div>
+        </div>
+
+        <!-- Global Progress Tracker -->
+        <div class="section-card mastery-card">
+          <h5>Concept Mastery Timeline</h5>
+          <div class="mastery-timeline" id="analytics-mastery-timeline">
+            <!-- Dynamically populated progress list -->
+            <div class="empty-placeholder">No concept tracking session active.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. REVISION TIMELINE TAB -->
+      <div id="tab-revision" class="tab-content">
+        <div class="revision-header-card">
+          <h4>Smart Spaced Revisions</h4>
+          <p>These timestamps point to concept moments where your recall questions failed. Click to rewind and solidify memory.</p>
+        </div>
+        <div class="revision-timeline-list" id="revision-timeline-container">
+          <div class="empty-placeholder">
+            <span>✨</span>
+            <p>Perfect recall! No weak timestamps registered yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. AI COMPANION TAB -->
+      <div id="tab-companion" class="tab-content">
+        <div class="companion-avatar-area">
+          <div class="companion-pulse-box">
+            <span class="companion-avatar-glow">🧠</span>
+          </div>
+          <div class="companion-status">
+            <h4>ActiveLearn Cognitive Buddy</h4>
+            <p id="buddy-status-text">Ready to unpack complex concepts</p>
+          </div>
+        </div>
+
+        <!-- Chat Output -->
+        <div class="chat-container" id="companion-chat-box">
+          <div class="chat-message system">
+            Hi! I am your active learning companion. I segment this YouTube lecture in real-time and construct recall questions. Ask me any question, or use the quick queries below!
+          </div>
+        </div>
+
+        <!-- Prompt Suggestions -->
+        <div class="chat-suggestions">
+          <button class="sug-btn" id="sug-summarize">📝 Summarize Chunk</button>
+          <button class="sug-btn" id="sug-exam">🎯 Exam Weightage?</button>
+          <button class="sug-btn" id="sug-explain">💡 Dynamic MCQ</button>
+        </div>
+
+        <!-- Message input -->
+        <div class="chat-input-area">
+          <input type="text" id="companion-input" placeholder="Ask about this video..." autocomplete="off">
+          <button id="companion-send-btn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
