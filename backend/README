@@ -1,1 +1,108 @@
+ActiveLearn AI - Walkthrough & Delivery
+ActiveLearn AI transforms passive YouTube educational video consumption into an adaptive, high-retention active recall learning zone. By adding a glassmorphism "cognitive layer" natively inside the YouTube player context, the extension tracks student focus, dynamically segments lecture topics, and provides targeted retrieval learning challenges.
 
+What We Accomplished
+We have fully implemented the startup-grade design system outlined in the plan:
+
+1. Chrome Extension Manifest V3 Configuration
+Updated 
+manifest.json
+ to rename the extension to ActiveLearn AI: YouTube Cognitive Layer.
+Registered web-accessible resources for secure content-script dynamic injection (dashboard.html and dashboard.css), avoiding iframe or script blocks on YouTube pages.
+2. Retractable Sliding Dashboard sidebar
+Created 
+dashboard.html
+ and 
+dashboard.css
+ representing a Startup-Grade Dark Design System:
+Glassmorphism backdrops using backdrop-filter: blur(30px).
+YouTube-red branding elements, rounded cards, and smooth micro-animations.
+Tab 1: Recall - Lists real-time concept chunks parsed from the lecture. Shows a live progress track, ETA duration, and a manual recall trigger.
+Tab 2: Analytics - Interactive SVG gauges for Focus Index and Engagement Tracker, an Ebbinghaus-model Memory Retention Estimator, a color-coded Weak-Topic Heatmap, and a vertical Concept Mastery Timeline.
+Tab 3: Spaced Revision - Timeline of failed concepts linked to exact clickable lecture timestamps that seek the player on click.
+Tab 4: AI Companion - Pulse-glowing brain companion chat pane. Includes suggestions like "Summarize Chunk", "Exam Weightage?", and "Dynamic MCQ" alongside standard custom entries.
+3. Multi-Format Adaptive Recall Overlay & UI Flow
+Rebuilt 
+overlay.html
+ and 
+overlay.css
+ to support:
+MCQs: Premium options buttons.
+Conceptual Questions: Multi-line textarea for active typing + "Reveal Concept Solution" + self-evaluation rating buttons ("Weak", "Partial", "Mastered").
+Numerical Questions: Numeric input field validating decimals and float ranges.
+Assertion-Reason Questions: Outlined statement blocks modeling rigorous competitive exam formats (e.g. GATE/UPSC).
+PYQ Banners: High-weightage banners indicating previous year questions.
+Upgraded 
+overlay.js
+ to dynamically render and handle interactions for each format:
+Two-Step Verification: Users submit their answer, view the solution/explanation, and then click a "Continue" or "Finish & Resume" button at their own pace. This replaces standard automated timeouts.
+Corrective haptic shakes and pulsing highlights are fully applied.
+4. Attention Intelligence & Structured Chunker Scripts
+Upgraded 
+content.js
+ to orchestrate tracking:
+Educational Filters: Scans tags, titles, and descriptions, allowing the cognitive dashboard to launch only on actual lectures.
+10-Minute Structured Chunker: Automatically partitions educational lectures into fixed 10-minute intervals (0-10m, 10-20m, etc.) and tags them with concept topics based on the course syllabus.
+Automatic 10-Minute Quiz Trigger: Actively tracks playhead timestamps. As the user reaches every 10-minute boundary (600s, 1200s, 1800s, etc.), the video is paused automatically and a fresh, randomized adaptive quiz is popped up. Questions are selected strictly from the concept pool matching the active chunk.
+Ended Video Final Report Overlay: On video completion (videoElement.ended), the extension pauses and opens a comprehensive Lecture Report Card Dashboard Overlay showing attempted questions, accuracy percentage, focus score, active recall composite score, dynamically identified mastered vs weak segments (with specific timestamp revision triggers), and an attention heatmap. Includes a button to sync metrics directly to the local FastAPI backend.
+Attention Tracks: Logs focus score (tab active time), engagement (mouse movements/scrolling/keystrokes), and skips.
+Interventions: The Floating AI Companion pulses orange and triggers speech warning overlays when excessive skips or 20-min passive fatigue are logged.
+5. Adaptive Difficulty Service Worker
+Upgraded 
+background.js
+ to manage:
+Global states (streak, score, weak concept arrays) saved securely to Chrome local storage.
+Chunk-Specific Question Pools: Questions are organized by chunk ID to target concepts explained strictly inside each 10-minute video segment.
+Adaptive Difficulty Engine: Calculates active student streaks (Streak 0-1: Easy, Streak 2-3: Medium, Streak 4-5: Hard, Streak 6+: Expert) and scales question pools accordingly.
+Robust question library mapping advanced conceptual and PYQ formats.
+6. Cloud Backend & DB Configuration
+Added a complete backend folder inside 
+backend/
+:
+requirements.txt
+: API server and LLM dependencies.
+db.py
+: Core SQLAlchemy engine and zero-config local SQLite fallback.
+models.py
+: PostgreSQL tables for users, video_sessions, concept_mastery, weak_concepts, and response_logs.
+main.py
+: FastAPI web server exposing REST endpoints for syncing states, recording responses, and loading spaced repetitions.
+How to Install & Test
+Part A: Loading the Chrome Extension
+Open Google Chrome.
+In the URL bar, go to chrome://extensions/.
+Enable Developer mode (toggle in the top-right corner).
+Click Load unpacked (top-left button).
+Select the workspace folder: c:\Users\SHILPI KUMARI\Desktop\ExtensionYT.
+Pin ActiveLearn AI in your extension list!
+Part B: Testing Active Recall on YouTube
+Open any watch page on YouTube (e.g. search for "Learn JavaScript Tutorial", "GATE Computer Science Lecture", or "UPSC Civil Services Physics").
+Look at the bottom-right corner of the video page:
+You will see the Floating Brain Companion (🧠) pulsing gently.
+On the right edge of the screen, you will see a sleek retractable tab: ActiveLearn AI.
+Click either the brain companion or the sliding tab:
+The Retractable sliding dashboard will slide out beautifully from the right!
+The video title is analyzed, and the timeline splits into key conceptual chunks listed in the panel.
+Interact with the tabs:
+Recall: View active progress, or click Trigger Active Recall Quiz to test immediately.
+Analytics: Check live focus/engagement scores (move your mouse around to increase engagement!), memory retention estimate, and concept progress.
+Revision: Shows failed concepts with timestamp buttons.
+Companion: Click suggested questions to chat with your cognitive buddy!
+Experience the pop-up modal:
+When a checkpoint is triggered (manually or periodically), the video pauses.
+A premium glassmorphic overlay appears.
+Try answering MCQs, type in your thoughts on Conceptual textareas and evaluate your memory, or calculate and submit Numerical values!
+Part C: Running the Cloud Backend (Optional)
+If you wish to spin up the startup-grade API server:
+
+Open your terminal in the workspace folder.
+Install python packages:
+bash
+pip install -r backend/requirements.txt
+Run the FastAPI development server:
+bash
+uvicorn backend.main:app --reload
+Access the interactive swagger UI at http://127.0.0.1:8000/docs to test focus synchronization, spaced revision timelines, and database mapping!
+Agent
+Authentication Required
+Please sign in.
